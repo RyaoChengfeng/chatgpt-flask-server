@@ -55,5 +55,5 @@ class Log:
         self.logger.critical(msg)
 
 
-log = Log(log_dir=log.log_dir, log_filename=log.log_filename, log_level=log.log_level,
-          use_debug_mode=log.use_debug_mode)
+logger = Log(log_dir=log.log_dir, log_filename=log.log_filename, log_level=log.log_level,
+             use_debug_mode=log.use_debug_mode)
