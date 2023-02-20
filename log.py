@@ -18,6 +18,10 @@ class Log:
         # 设置日志格式
         log_format = logging.Formatter('%(asctime)s | %(levelname)s | %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
+        # 开启 debug 模式
+        if use_debug_mode:
+            log_level = logging.DEBUG
+
         # 设置文件处理器
         file_handler = RotatingFileHandler(log_file_path, maxBytes=1024 * 1024 * 10, backupCount=5)
         file_handler.setLevel(log_level)
@@ -33,11 +37,6 @@ class Log:
         self.logger.setLevel(log_level)
         self.logger.addHandler(file_handler)
         self.logger.addHandler(console_handler)
-
-        # 开启 debug 模式
-        if use_debug_mode:
-            self.logger.setLevel(logging.DEBUG)
-            self.logger.debug("Debug mode enabled")
 
     def debug(self, msg):
         self.logger.debug(msg)
