@@ -1,6 +1,6 @@
 import logging
 import os
-from config import log
+from config import log, debug
 from logging.handlers import RotatingFileHandler
 
 DEFAULT_LOG_DIR = "./logs"
@@ -56,4 +56,4 @@ class Log:
 
 
 logger = Log(log_dir=log.log_dir, log_filename=log.log_filename, log_level=log.log_level,
-             use_debug_mode=log.use_debug_mode)
+             use_debug_mode=debug)

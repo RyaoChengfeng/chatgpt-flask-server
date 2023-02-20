@@ -183,3 +183,4 @@ cython_debug/
 logs
 env/dev.yaml
 env/prod.yaml
+docker-compose.yml

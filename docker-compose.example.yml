@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  web:
+    image: chatgpt-flask-server:latest
+    ports:
+      - "7777:7777"
+    volumes:
+      - "./env:/app/env"
+      - "./logs:/app/logs"
+    environment:
+      - ENVIRONMENT=config
+      - FLASK_APP=main.py
+    container_name: chatgpt-flask-server-web

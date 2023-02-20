@@ -2,7 +2,8 @@ import flask
 import json
 import chatgpt
 from flask import request
-from config import app
+from config import app, debug
+from log import logger
 
 server = flask.Flask(__name__)
 
@@ -11,15 +12,15 @@ server = flask.Flask(__name__)
 def chatapi():
     requestJson = request.get_data()
     if requestJson is None or requestJson == "" or requestJson == {}:
-        resu = {'code': 1, 'msg': '请求内容不能为空'}
+        resu = {'code': 1, 'message': 'empty request body!'}
         return json.dumps(resu, ensure_ascii=False)
     data = json.loads(requestJson)
-    print(data)
+    logger.debug("request data: " + str(data))
     try:
-        msg = chatgpt.chat(data['msg'])
+        msg = chatgpt.chat(data['message'])
     except Exception as error:
-        print("接口报错")
-        resu = {'code': 1, 'msg': '请求异常: ' + str(error)}
+        logger.error('chatgpt request error: ' + str(error))
+        resu = {'code': 1, 'message': 'chatgpt request error: ' + str(error)}
         return json.dumps(resu, ensure_ascii=False)
     else:
         resu = {'code': 0, 'data': msg}
@@ -27,7 +28,7 @@ def chatapi():
 
 
 if __name__ == '__main__':
-    server.run(port=app.port, host=app.host)
+    server.run(port=app.port, host=app.host, debug=debug)
 
     # res = get_cf_shit()
     # if res['success']:

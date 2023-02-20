@@ -1,5 +1,6 @@
-FROM python:3.8
-COPY . /app
+FROM python:3.10
 WORKDIR /app
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-ENTRYPOINT ["python3","/app/bot.py"]
+COPY . /app
+ENTRYPOINT ["python3","/app/main.py"]
